@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block page_title %}
+    {{ title }}
+    <a>Лучшие вопросы</a>
+{#    {% if key == 'new' %}<a href="{% url 'hot' %}" class="small">Лучшие вопросы</a>{% endif %}#}
+{#    {% if key == 'hot' %}<a href="{% url 'index' %}" class="small">Новые вопросы</a>{% endif %}#}
+{% endblock %}
+{% block content %}
+
+    <div class="ask-questions">
+{#        {% for question in questions %}#}
+            <div class="ask-question ask-question-gray">
+                <div class="ask-question-info">
+                    <div class="ask-user-avatar-container">
+                        {% load static %}
+                        <img src="https://www.w3schools.com/howto/img_avatar2.png" class="user-avatar"
+                             alt="Elfimov Vladimir"/>
+                        <div class="small">Martinov Anton</div>
+                    </div>
+                    <div class="ask-question-data">
+                        <div class="ask-question-title"><a>{{ question }}</a></div>
+                        <p class="ask-question-text">Это сам текст вопроса</p>
+                    </div>
+                </div>
+                <div class="ask-question-options">
+                    <div class="ask-question-vote">
+{#                        <a class="btn btn-xs btn-danger ask-question-vote-down"#}
+{#                           {% if not request.user.is_authenticated %}disabled="disabled"{% endif %}#}
+                           data-question-like-down="question_id"><span
+                                class="glyphicon glyphicon-thumbs-down"></span></a>
+                        <span class="ask-question-vote-count"
+                              data-question-like-count="ID QUESTION">1234</span>
+                        <a class="btn btn-xs btn-success ask-question-vote-up"
+{#                           {% if not request.user.is_authenticated %}disabled="disabled"{% endif %}#}
+                           data-question-like-up="question_id"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                    </div>
+                    <div class="ask-question-answer-link">
+                        <a>Ответы</a>
+                    </div>
+                    <div class="ask-tags ask-question-tags">
+{#                        {% for tag in question.tags.all %}#}
+                            <a
+                               class="ask-tags-tag">"Название тега"</a>
+{#                        {% endfor %}#}
+                    </div>
+                </div>
+            </div>
+{#        {% endfor %}#}
+    </div>
+
+{#    {% include 'paginator.html' with objects=questions %}#}
+
+{% endblock %}
