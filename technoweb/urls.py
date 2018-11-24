@@ -20,4 +20,7 @@ from ask_evv import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', views.QuestionsNew.as_view(), name='index'),
+    path(r'question/<int:id>/',
+                      views.SingleQuestion.as_view(),
+                      name='question'),
 ]

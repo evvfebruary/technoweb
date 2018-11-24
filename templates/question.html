@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}{{ question.title }}{% endblock %}
+{% block page_title %}{% endblock %}
+
+{% block content %}
+    <div class="ask-question ask-question-noborder">
+        <div class="ask-question-info">
+            <div class="ask-user-avatar-container">
+                <img src="{{ question.author.profile.avatar.url }}" class="user-avatar"
+                     title="{{ question.author.last_name }} {{ question.author.first_name }}"/>
+                <div class="small">{{ question.author.last_name }} {{ question.author.first_name }}</div>
+            </div>
+            <div class="ask-question-data">
+                <div class="ask-question-title-big">{{ question.title }}</div>
+                <p class="ask-question-text">{{ question.text }}</div>
+        </div>
+        <div class="ask-question-options">
+            <div class="ask-question-vote">
+                <a class="btn btn-xs btn-danger ask-question-vote-down"
+                   {% if not request.user.is_authenticated %}disabled="disabled"{% endif %}
+                   data-question-like-down="{{ question.id }}"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+                <span class="ask-question-vote-count"
+                      data-question-like-count="{{ question.id }}">{{ question.likes }}</span>
+                <a class="btn btn-xs btn-success ask-question-vote-up"
+                   {% if not request.user.is_authent5202icated %}disabled="disabled"{% endif %}
+                   data-question-like-up="{{ question.id }}"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+            </div>
+            <div class="ask-tags ask-question-tags">
+                {% for tag in question.tags.all %}
+                    <a href="{{ tag.get_url }}"
+                       class="ask-tags-tag ask-tags-tag_color_{{ tag.get_color_display }}">{{ tag.title }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <hr/>
+        <div class="ask-answers">
+            <div class="ask-answers-container">
+            </div>
+            <div class="ask-answers-loading">
+            </div>
+            <div class="ask-answers-more" style="display: none" data-page="1">
+                Загрузить ещё ответы...
+            </div>
+        </div>
+    </div>
+{% endblock %}

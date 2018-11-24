@@ -21,4 +21,15 @@ class QuestionsNew(View):
                       {
                           'questions': pagination,
                       })
-        # return render(request, 'questions_list.html', context={"questions": md.Question.objects.all(),"tags":md.Tag.objects.all()})
+
+
+class SingleQuestion(View):
+    def get(self, request, id):
+        try:
+            q = Question.objects.get_single(int(id))
+        except Question.DoesNotExist:
+            raise Http404
+
+        return render(request, 'question.html', {
+            'question': q,
+        })

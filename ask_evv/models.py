@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Count, Sum
 from django.contrib import admin
-from django.utils import timezone
+from django.urls import reverse
 from django.utils import timezone
 # Пользователь – электронная почта, никнейм, пароль, аватарка, дата регистрации, рейтинг.
 # Вопрос – заголовок, содержание, автор, дата создания, теги, рейтинг.
@@ -145,6 +145,9 @@ class Question(models.Model):
     tags = models.ManyToManyField(Tag)
 
     objects = QuestionManager()
+
+    def get_url(self):
+        return reverse('question', kwargs={'id': self.id})
 
     def get_prettify_title(self):
         title_formatted_text = self.title[:80] + "..." if len(self.title) > 80 else self.title
